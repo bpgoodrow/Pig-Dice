@@ -17,7 +17,7 @@ Players.prototype.createRoundScore = function (diceRoll) {
     this.roundScore = 0;
   } else {
     this.roundScore.push(diceRoll)
-  } 
+  }
   return rollDice;
 };
 
@@ -27,6 +27,37 @@ Players.prototype.createTotalScore = function (total) {
 }
 
 //creates player to send score into array inside player
-let player1 = new Players("Ben", roundScoreArray, totalScore)
-player1.createRoundScore(6);
-player1.createTotalScore(5);
+// let player1 = new Players("Ben", roundScoreArray, totalScore)
+// player1.createRoundScore(6);
+// player1.createTotalScore(5);
+
+// UI Logic
+let players = new Players();
+
+function displayPlayersDetail(playersToDisplay) {
+  let playerOne = $("#player1");
+  let playerTwo = $("#player2");
+  let htmlForPlayersScore = "";
+  Object.keys(playersToDisplay.players).forEach(function (key) {
+    const human = playersToDisplay.findPlayers(key);
+    htmlForPlayer1RoundScore += "<p>" + human.roundScore + "</p>";
+  });
+  playerOne.html(htmlForPlayersScore);
+  playerTwo.html(htmlForPlayersScore);
+}
+
+$(document).ready(function () {
+
+  $("form#player1").submit(function (event) {
+    event.preventDeafault();
+    const roundScore = $("#round-score").val();
+    const totalScore = $("#total-score").val();
+    let player1 = new Players(roundScore, totalScore);
+    players.addPlayers(player1);
+    displayPlayersDetail(players);
+  });
+});
+
+
+    // const roundScore = $("#round-score2").val();
+    // const totalScore = $("#total-score2").val();
