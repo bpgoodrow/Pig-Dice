@@ -1,4 +1,4 @@
-let roundScore = [];
+let roundScoreArray = [];
 
 function Players(name, roundScore, totalScore) {
   this.playerName = name;
@@ -11,12 +11,14 @@ let rollDice = function () {
   return diceRoll;
 };
 
-Players.prototype.roundScore = function (bust) {
-  let rollDice = rollDice;
+Players.prototype.createRoundScore = function (diceRoll) {
   if (diceRoll === 1) {
-    roundScore = 0;
+    this.roundScore = 0;
   } else {
-    roundScore.push(diceRoll)
+    this.roundScore.push(diceRoll)
   } 
   return rollDice;
 };
+
+let player1 = new Players("Ben", roundScoreArray, "totalScore")
+player1.createRoundScore(6);
